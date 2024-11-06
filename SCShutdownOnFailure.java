@@ -1,7 +1,6 @@
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.StructuredTaskScope.Subtask;
-import java.util.function.Supplier;
 
 public class SCShutdownOnFailure {
 
