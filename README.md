@@ -6,4 +6,4 @@ Repositorio con ejemplos de codigo.
 
 [Post]() -> pendiente
 
-[Codigo]() -> pendiente
+[Codigo](/linkedin_virtual_threads/README.md)
