@@ -1,5 +1,6 @@
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.StructuredTaskScope;
+import java.util.concurrent.StructuredTaskScope.Subtask;
 import java.util.function.Supplier;
 
 public class SCShutdownOnFailure {
@@ -17,13 +18,13 @@ public class SCShutdownOnFailure {
     public static void shutdownOnFailureDemo() throws ExecutionException, InterruptedException {
 
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            Supplier<Integer> inv = scope.fork(() -> callFail()); // falla
-            Supplier<Integer> ord = scope.fork(() -> callSuccess()); // cancela
+            Subtask<Integer> fail = scope.fork(() -> callFail()); // falla
+            Subtask<Integer> succ = scope.fork(() -> callSuccess()); // cancela
 
             scope.join(); // unir los forks
             scope.throwIfFailed(); // si falla alguno propagar el error
 
-            System.out.println("Result is inv = " + inv.get() + " ord = " + ord.get());
+            System.out.println("Result is inv = " + fail.state() + " ord = " + succ.state());
         }
     }
 
